@@ -228,12 +228,22 @@
 		padding: 0;
 		list-style: none;
 
-		li > a {
+		li {
+			color: $color__text-light;
 			@include font-family( $font__heading );
 			font-size: calc(#{$font__size_base} * #{$font__size-ratio});
 			font-weight: bold;
 			line-height: $font__line-height-heading;
-			text-decoration: none;
+			padding-bottom: ( .75 * $size__spacing-unit );
+
+			&.menu-item-has-children,
+			&:last-child {
+				padding-bottom: 0;
+			}
+
+			a {
+				text-decoration: none;
+			}
 		}
 	}
 
@@ -260,36 +270,9 @@
 		@include nestedSubMenuPadding();
 	}
 
-	//! Latest posts
-	.wp-block-latest-posts {
-
-		.wp-block-latest-posts__post-date {
-			@include font-family( $font__heading );
-			font-size: $font__size-xs;
-			color: $color__text-light;
-			line-height: 1.2;
-		}
-
-		.wp-block-latest-posts__post-full-content,
-		.wp-block-latest-posts__post-excerpt {
-			margin-top: $size__spacing-unit;
-			margin-bottom: $size__spacing-unit;
-		}
-
+	//! Latest posts grid view
+	.wp-block-latest-posts.is-grid {
 		li {
-			padding-bottom: ( .5 * $size__spacing-unit );
-
-			&.menu-item-has-children,
-			&:last-child {
-				padding-bottom: 0;
-			}
-
-			:not(:last-child) .wp-block-latest-posts__post-excerpt {
-				padding-bottom: ( .5 * $size__spacing-unit );
-			}
-		}
-
-		&.is-grid li {
 			border-top: 2px solid $color__border;
 			padding-top: (1 * $size__spacing-unit);
 			margin-bottom: (2 * $size__spacing-unit);
@@ -469,8 +452,7 @@
 
 		&:not(.is-large),
 		&:not(.is-style-large) {
-			border-width: 2px;
-			border-color: $color__link;
+			border-left: 2px solid $color__link;
 			padding-top: 0;
 			padding-bottom: 0;
 		}
@@ -530,7 +512,7 @@
 		}
 
 		.aligncenter {
-
+			
 			@include postContentMaxWidth();
 
 			@include media(tablet) {
@@ -751,29 +733,46 @@
 		code {
 			font-size: $font__size-md;
 			white-space: pre-wrap;
-			word-break: break-word;
+    	                word-break: break-word;
 		}
 	}
 
 	//! Columns
 	.wp-block-columns {
 
-		.wp-block-column > * {
+		&.alignfull {
+			padding-left: $size__spacing-unit;
+			padding-right: $size__spacing-unit;
+		}
 
-			&:first-child {
-				margin-top: 0;
-			}
-
-			&:last-child {
-				margin-bottom: 0;
-			}
+		@include media(mobile) {
+			flex-wrap: nowrap;
 		}
 
 		@include media(tablet) {
-			flex-wrap: nowrap;
+			.wp-block-column > * {
 
-			.wp-block-column:not(:first-child) {
-				margin-left: 32px;
+				&:first-child {
+					margin-top: 0;
+				}
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			&[class*='has-'] > * {
+				margin-right: $size__spacing-unit;
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+
+			&.alignfull,
+			&.alignfull .wp-block-column {
+				padding-left: calc(2 * #{$size__spacing-unit});
+				padding-right: calc(2 * #{$size__spacing-unit});
 			}
 		}
 	}
@@ -838,14 +837,14 @@
 		// Use white text against these backgrounds by default.
 		color: $color__background-body;
 
-		> p,
-		> h1,
-		> h2,
-		> h3,
-		> h4,
-		> h5,
-		> h6,
-		> a {
+		p,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		a {
 			color: $color__background-body;
 		}
 	}
@@ -854,14 +853,14 @@
 		color: $color__text-main;
 
 		// Use dark gray text against this background by default.
-		> p,
-		> h1,
-		> h2,
-		> h3,
-		> h4,
-		> h5,
-		> h6,
-		> a {
+		p,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6,
+		a {
 			color: $color__text-main;
 		}
 	}
@@ -894,25 +893,25 @@
 	//! Custom foreground colors
 	.has-primary-color,
 	.wp-block-pullquote.is-style-solid-color blockquote.has-primary-color,
-	.wp-block-pullquote.is-style-solid-color blockquote.has-primary-color > p {
+	.wp-block-pullquote.is-style-solid-color blockquote.has-primary-color p {
 		color: $color__link;
 	}
 
 	.has-secondary-color,
 	.wp-block-pullquote.is-style-solid-color blockquote.has-secondary-color,
-	.wp-block-pullquote.is-style-solid-color blockquote.has-secondary-color > p {
+	.wp-block-pullquote.is-style-solid-color blockquote.has-secondary-color p {
 		color: $color__border-link-hover;
 	}
 
 	.has-dark-gray-color,
 	.wp-block-pullquote.is-style-solid-color blockquote.has-dark-gray-color,
-	.wp-block-pullquote.is-style-solid-color blockquote.has-dark-gray-color > p {
+	.wp-block-pullquote.is-style-solid-color blockquote.has-dark-gray-color p {
 		color: $color__text-main;
 	}
 
 	.has-light-gray-color,
 	.wp-block-pullquote.is-style-solid-color blockquote.has-light-gray-color,
-	.wp-block-pullquote.is-style-solid-color blockquote.has-light-gray-color > p {
+	.wp-block-pullquote.is-style-solid-color blockquote.has-light-gray-color p {
 		color: $color__text-light;
 	}
 
