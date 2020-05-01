@@ -38,7 +38,7 @@ define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
 define( 'WP_REDIS_HOST','wordpress.ndj3gk.0001.use1.cache.amazonaws.com');
-#define( 'WP_CACHE',false);
+define( 'WP_CACHE',false);
 /**#@+
  * Authentication Unique Keys and Salts.
  *
