@@ -18,6 +18,9 @@
  * @package WordPress
  */
 
+define( 'WP_REDIS_HOST','wordpress.ndj3gk.0001.use1.cache.amazonaws.com');
+define( 'WP_CACHE',false);
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'codeinjsDB' );
@@ -36,9 +39,6 @@ define( 'DB_CHARSET', 'utf8' );
 
 /** The Database Collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
-
-define( 'WP_REDIS_HOST','wordpress.ndj3gk.0001.use1.cache.amazonaws.com');
-define( 'WP_CACHE',false);
 /**#@+
  * Authentication Unique Keys and Salts.
  *
